@@ -1,0 +1,99 @@
+body {
+    position: relative;
+}
+
+.cache-timer {
+    * {
+        box-sizing: border-box;
+    }
+    &_block {
+        position: fixed;
+        //background: pink;
+        width: 52px;
+        height: 52px;
+        bottom: 1em;
+        left: 1em;
+        z-index: 9999;
+    }
+
+    &_container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: pink;
+        border-radius: 50%;
+        border: 1px solid pink;
+    }
+
+    &_circle,
+    &_time,
+    &_btn {
+        position: absolute;
+    }
+
+    &_time,
+    &_btn {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+    }
+
+    &_btn {
+        display: block;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            transform: translate(-50%, -50%) rotate(-180deg);
+            color: darken(pink, 10%);
+        }
+    }
+
+    &_time {
+        font-family: "Lucida Console", Monaco, monospace;
+        font-size: 12px;
+        display: none;
+    }
+
+    &_circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        transform: rotateY(-180deg) rotateZ(-90deg);
+
+        circle {
+            stroke-dasharray: 157.08px;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            stroke-width: 5px;
+            stroke: white;
+            fill: none;
+        }
+    }
+    @keyframes countdown {
+        from {
+            stroke-dashoffset: 0;
+        }
+
+        to {
+            stroke-dashoffset: 157.08px;
+        }
+    }
+
+    &.on {
+        .cache-timer_btn {
+            display: none;
+        }
+        .cache-timer_time {
+            display: block;
+        }
+        .cache-timer_circle circle {
+            //animation: countdown 120s linear infinite forwards;
+            animation-name: countdown;
+            //animation-duration: 120s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: forwards;
+        }
+    }
+}
